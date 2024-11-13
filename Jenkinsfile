@@ -15,36 +15,35 @@ pipeline {
             }
         }
 
-//         stage("Set Variables"){
-//            steps{
-//                echo "SetVariables"
-//                script{
-//                    DOCKER_HUB_URL = 'registry.hub.docker.com'
-//                    DOCKER_HUB_FULL_URL = 'https://' + DOCKER_HUB_URL
-//                    DOCKER_HUB_CREDENTIAL_ID = 'docker-hub'
-//                }
-//            }
-//         }
-//
-//
-//         stage("Permission") { // Gradle Wrapper에 실행 권한을 부여하는 단계
-//             steps {
-//                 sh "chmod +x ./gradlew" // gradlew 파일에 실행 권한 추가
-//             }
-//         }
-//
-//         stage("Compile") { // Java 코드를 컴파일하는 단계
-//             steps {
-//                 sh "./gradlew compileJava" // Gradle을 사용해 Java 코드를 컴파일
-//             }
-//         }
-//
-//         stage("Unit Test") { // 단위 테스트를 실행하는 단계
-//             steps {
-//                 sh "./gradlew test" // Gradle을 사용해 테스트 실행
-//             }
-//         }
-//
+        stage("Set Variables"){
+           steps{
+               echo "SetVariables"
+               script{
+                   DOCKER_HUB_URL = 'registry.hub.docker.com'
+                   DOCKER_HUB_FULL_URL = 'https://' + DOCKER_HUB_URL
+                   DOCKER_HUB_CREDENTIAL_ID = 'docker-hub'
+               }
+           }
+        }
+
+
+        stage("Permission") { // Gradle Wrapper에 실행 권한을 부여하는 단계
+            steps {
+                sh "chmod +x ./gradlew" // gradlew 파일에 실행 권한 추가
+            }
+        }
+
+        stage("Compile") { // Java 코드를 컴파일하는 단계
+            steps {
+                sh "./gradlew compileJava" // Gradle을 사용해 Java 코드를 컴파일
+            }
+        }
+
+        stage("Unit Test") { // 단위 테스트를 실행하는 단계
+            steps {
+                sh "./gradlew test" // Gradle을 사용해 테스트 실행
+            }
+        }
 //         stage("Static Code Analysis") { // 정적 코드 분석을 실행하는 단계
 //             steps {
 //                 sh "./gradlew checkstyleMain" // Checkstyle을 사용해 코드 분석
