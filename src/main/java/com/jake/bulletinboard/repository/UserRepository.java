@@ -1,4 +1,4 @@
-package com.jake.bulletinboard.Repository;
+package com.jake.bulletinboard.repository;
 
 import com.jake.bulletinboard.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
