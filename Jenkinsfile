@@ -4,7 +4,7 @@ pipeline {
 //             imagename = "ukjang/springcalculation"
             registryCredential = 'docker-hub'
 //             ubuntuIp = '13.209.76.15'
-            dockerImage = ''
+//             dockerImage = ''
 //             containerName = "springcalculation"
         }
     stages {
