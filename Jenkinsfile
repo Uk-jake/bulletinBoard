@@ -1,11 +1,11 @@
 pipeline {
     agent any // Jenkins가 가용한 모든 에이전트에서 실행되도록 설정
      environment {
-//             imagename = "ukjang/springcalculation"
+            imagename = "ukjang/bulletinboard"
             registryCredential = 'docker-hub'
 //             ubuntuIp = '13.209.76.15'
-//             dockerImage = ''
-//             containerName = "springcalculation"
+            dockerImage = ''
+            containerName = "bulletinboard"
         }
     stages {
         stage("checkout") { // 소스 코드 Checkout 단계
@@ -57,41 +57,29 @@ pipeline {
                     }
                 }
 
-//         stage("Static Code Analysis") { // 정적 코드 분석을 실행하는 단계
-//             steps {
-//                 sh "./gradlew checkstyleMain" // Checkstyle을 사용해 코드 분석
-//                 publishHTML(target: [ // HTML 형식의 Checkstyle 리포트를 Jenkins에 게시
-//                     reportDir: 'build/reports/checkstyle/', // 리포트 디렉터리 경로
-//                     reportFiles: 'main.html', // 리포트 파일 이름
-//                     reportName: 'Checkstyle Report' // 리포트의 이름 설정
-//                 ])
-//             }
-//         }
-//
 
-//
-//         stage("Gradle Build") { // Gradle 빌드 단계
-//             steps {
-//                 sh "./gradlew clean build" // Gradle을 사용해 프로젝트를 클린 빌드
-//             }
-//         }
-//
-//         stage("Docker Image Build") { // Docker 이미지를 빌드하는 단계
-//             steps {
-//                 sh "docker build -t ${imagename} ." // Docker 이미지를 빌드하고 태그를 imagename 설정
-//             }
-//         }
-//
-//         stage("Push Docker Image") { // Docker Hub에 이미지를 푸시하는 단계
-//                     steps {
-//                         script {
-//                             // Docker Hub에 로그인하고 이미지 푸시
-//                             docker.withRegistry('', registryCredential) {
-//                                 sh "docker push ${imagename}" // Docker Hub에 이미지 푸시
-//                             }
-//                         }
-//                     }
-//                 }
+        stage("Gradle Build") { // Gradle 빌드 단계
+            steps {
+                sh "./gradlew clean build" // Gradle을 사용해 프로젝트를 클린 빌드
+            }
+        }
+
+        stage("Docker Image Build") { // Docker 이미지를 빌드하는 단계
+            steps {
+                sh "docker build -t ${imagename} ." // Docker 이미지를 빌드하고 태그를 imagename 설정
+            }
+        }
+
+        stage("Push Docker Image") { // Docker Hub에 이미지를 푸시하는 단계
+                    steps {
+                        script {
+                            // Docker Hub에 로그인하고 이미지 푸시
+                            docker.withRegistry('', registryCredential) {
+                                sh "docker push ${imagename}" // Docker Hub에 이미지 푸시
+                            }
+                        }
+                    }
+                }
 //
 //         // EC2 Server docker container 실행
 // //         stage('SSH-Server-EC2') {
