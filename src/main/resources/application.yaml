@@ -1,0 +1,11 @@
+spring:
+  application:
+    name : bulletinBoard
+  datasource:
+    url: jdbc:mysql://13.209.76.34:3306/test_db
+    username: test_user
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
